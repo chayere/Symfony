@@ -1,0 +1,42 @@
+ch_platform_home:
+    path:	/{page}
+    defaults:
+        _controller: CHPlatformBundle:Advert:index
+        page: 1
+    requirements:
+        page: \d*
+
+ch_platform_view:
+    path:   /advert/{id}
+    defaults:
+        _controller: CHPlatformBundle:Advert:view
+    requirements:
+        id: \d+
+
+ch_platform_view_slug:
+    path:   /{year}/{slug}.{_format}
+    defaults:
+        _controller: CHPlatformBundle:Advert:viewSlug
+        _format: html
+    requirements:
+        year: \d{4}
+        _format: html|xml
+
+ch_platform_add:
+    path:   /add
+    defaults:
+        _controller: CHPlatformBundle:Advert:add
+
+ch_platform_edit:
+    path:   /edit/{id}
+    defaults:
+        _controller: CHPlatformBundle:Advert:edit
+    requirements:
+        id: \d+
+
+ch_platform_delete:
+    path:   /delete/{id}
+    defaults:
+        _controller: CHPlatformBundle:Advert:delete
+    requirements:
+        id: \d+

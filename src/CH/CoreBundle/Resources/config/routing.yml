@@ -1,0 +1,7 @@
+ch_core_home:
+    path:     /
+    defaults: { _controller: CHCoreBundle:Core:index }
+
+ch_core_contact:
+    path:    /contact
+    defaults: { _controller: CHCoreBundle:Core:contact }

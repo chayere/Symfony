@@ -1,0 +1,13 @@
+{% extends "CHCoreBundle::layout.html.twig" %}
+
+{% block title %} Page d'accueil - {{ parent() }} {% endblock %}
+
+{% block body %}   
+	
+	<h2>Page d'accueil du site</h2>
+  
+  	{% for message in app.session.flashbag.get('info') %}
+		<div class="alert alert-info">{{ message }}</div>
+  	{% endfor %}
+
+{% endblock %}

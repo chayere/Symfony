@@ -1,0 +1,89 @@
+{% extends "CHPlatformBundle::layout.html.twig" %}
+
+{% block title %} Annonce {{ advert.id }} - {{ parent() }} {% endblock %}
+
+{% block ch_platform_body %} 
+
+	{% for message in app.session.flashbag.get('info') %}
+		<div class="alert alert-info">{{ message }}</div>
+  	{% endfor %} 
+
+	{% if advert.image is not null %}
+
+		<div class="row">
+			<div class="col-md-3">
+				<img src="{{ advert.image.url }}" alt="{{ advert.image.alt }}" width="100%">
+			</div>
+
+			<div class="col-md-9">
+				<h2>{{ advert.title }}</h2>
+
+				<i>Par {{ advert.author }}, le {{ advert.date|date('d/m/Y') }}</i>
+				<br>
+				Dernière modification : Le {{ advert.updatedAt|date('d/m/Y') }} à {{ advert.updatedAt|date('H:i') }}
+
+				<br>
+
+				{% for category in advert.categories %}
+					<span class="label label-primary">{{category.name}}</span>
+				{% endfor %}
+			</div>
+		</div>
+
+	{% else %}
+
+		<h2>{{ advert.title }}</h2>
+		<i>Par {{ advert.author }}, le {{ advert.date|date('d/m/Y') }}</i>
+		<br>
+		Dernière modification : Le {{ advert.updatedAt|date('d/m/Y') }} à {{ advert.updatedAt|date('H:i') }}
+		
+		<br>
+
+		{% for category in advert.categories %}
+			<span class="label label-primary">{{category.name}}</span>
+		{% endfor %}
+
+	{% endif %}	
+
+	<br>
+
+	<div class="well">
+		{{ advert.content }}
+		<br><br>
+		<b>Capacités recherchées : </b>
+		<br>
+			{% for advertSkill in advertSkills %} 
+				<span> {{advertSkill.skill.name}} : <span class="label label-default">{{advertSkill.level}}</span></span> 
+			{% endfor %}
+	</div>
+
+	<p>
+		<a href="{{ path('ch_platform_home') }}" class="btn btn-default">
+			<i class="glyphicon glyphicon-chevron-left"></i>
+			Retour à la liste
+		</a>
+		<a href="{{ path('ch_platform_edit', {'id':advert.id}) }}" class="btn btn-default">
+			<i class="glyphicon glyphicon-edit"></i>
+			Modifier l'annonce
+		</a>
+		<a href="{{ path('ch_platform_delete', {'id':advert.id}) }}" class="btn btn-danger">
+			<i class="glyphicon glyphicon-trash"></i>
+			Supprimer l'annonce
+		</a>
+	</p>
+
+	<hr>
+
+	<h3>Candidatures à cette annonce ({{ advert.nbApplications }})</h3>
+
+	<div class="row">
+		{% for application in applications %}
+			<div class="col-md-3">
+				<h4>{{ application.content }}</h4>
+				<i>Par {{ application.author }}, le {{ application.date|date('d/m/Y') }}</i>
+			</div>
+		{% endfor %}
+	</div>
+
+
+{% endblock %}

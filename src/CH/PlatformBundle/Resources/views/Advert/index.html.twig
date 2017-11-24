@@ -1,0 +1,49 @@
+{% extends "CHPlatformBundle::layout.html.twig" %}
+
+{% block title %} Accueil - {{ parent() }} {% endblock %}
+
+{% block ch_platform_body %}   
+	
+	<h2>Liste des annonces</h2>
+
+	<ul>
+		{% for advert in listAdverts %}
+			<br>
+			<li>
+				<a href="{{ path('ch_platform_view', {'id':advert.id}) }}">{{ advert.title }}</a>
+				par {{ advert.author }}, 
+				le {{ advert.date|date('d/m/Y') }} <br>
+				{% for category in advert.categories %}
+					<span class="label label-primary">{{category.name}}</span>
+				{% endfor %}
+			</li>
+		{% else %}
+			<li>Pas (encore !) d'annonces</li>
+		{% endfor %}
+	</ul>
+
+	<br>
+
+	<div class="row">
+
+		<div class="col-md-3">
+		</div>
+
+		<div class="col-md-6">
+			<div style="text-align:center;">
+				{% for i in 1..nbPages %}
+					{% if i == page %}
+						<a class="btn btn-primary btn-sm" href="{{ path('ch_platform_home', {'page':i}) }}">{{i}}</a>
+					{% else %}
+						<a class="btn btn-default btn-sm" href="{{ path('ch_platform_home', {'page':i}) }}">{{i}}</a>
+					{% endif %}
+				{% endfor %}
+			</div>
+		</div>
+
+		<div class="col-md-3">
+		</div>
+
+	</div>
+
+{% endblock %}

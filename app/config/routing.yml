@@ -1,0 +1,7 @@
+ch_core:
+    resource: "@CHCoreBundle/Resources/config/routing.yml"
+    prefix:   /
+
+ch_platform:
+    resource: "@CHPlatformBundle/Resources/config/routing.yml"
+    prefix:   /platform
